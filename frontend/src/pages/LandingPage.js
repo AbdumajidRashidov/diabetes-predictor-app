@@ -29,7 +29,7 @@ const ContentStyle = styled("div")(({ theme }) => ({
 
 export default function LandingPage() {
   return (
-    <RootStyle title="Medarmon" id="move_top">
+    <RootStyle title="VIVA" id="move_top">
       <LandingHero />
       <ContentStyle>
         <LandingMinimal />

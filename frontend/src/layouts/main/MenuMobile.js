@@ -1,20 +1,29 @@
-import PropTypes from 'prop-types';
-import { Icon } from '@iconify/react';
-import { useState, useEffect } from 'react';
-import menu2Fill from '@iconify/icons-eva/menu-2-fill';
-import { NavLink as RouterLink, useLocation } from 'react-router-dom';
-import arrowIosForwardFill from '@iconify/icons-eva/arrow-ios-forward-fill';
-import arrowIosDownwardFill from '@iconify/icons-eva/arrow-ios-downward-fill';
+import PropTypes from "prop-types";
+import { Icon } from "@iconify/react";
+import { useState, useEffect } from "react";
+import menu2Fill from "@iconify/icons-eva/menu-2-fill";
+import { NavLink as RouterLink, useLocation } from "react-router-dom";
+import arrowIosForwardFill from "@iconify/icons-eva/arrow-ios-forward-fill";
+import arrowIosDownwardFill from "@iconify/icons-eva/arrow-ios-downward-fill";
 // material
-import { alpha, styled } from '@material-ui/core/styles';
-import { Box, List, Drawer, Link, Collapse, ListItemText, ListItemIcon, ListItemButton } from '@material-ui/core';
+import { alpha, styled } from "@material-ui/core/styles";
+import {
+  Box,
+  List,
+  Drawer,
+  Link,
+  Collapse,
+  ListItemText,
+  ListItemIcon,
+  ListItemButton,
+} from "@material-ui/core";
 // components
-import Logo from '../../components/Logo';
-import NavSection from '../../components/NavSection';
-import Scrollbar from '../../components/Scrollbar';
-import { MIconButton } from '../../components/@material-extend';
+import Logo from "../../components/Logo";
+import NavSection from "../../components/NavSection";
+import Scrollbar from "../../components/Scrollbar";
+import { MIconButton } from "../../components/@material-extend";
 //
-import menuConfig from './MenuConfig';
+import menuConfig from "./MenuConfig";
 
 // ----------------------------------------------------------------------
 
@@ -25,10 +34,10 @@ const PADDING = 2.5;
 const ListItemStyle = styled(ListItemButton)(({ theme }) => ({
   ...theme.typography.body2,
   height: ITEM_SIZE,
-  textTransform: 'capitalize',
+  textTransform: "capitalize",
   paddingLeft: theme.spacing(PADDING),
   paddingRight: theme.spacing(2.5),
-  color: theme.palette.text.secondary
+  color: theme.palette.text.secondary,
 }));
 
 // ----------------------------------------------------------------------
@@ -37,7 +46,7 @@ MenuMobileItem.propTypes = {
   item: PropTypes.object,
   isOpen: PropTypes.bool,
   isActive: PropTypes.bool,
-  onOpen: PropTypes.func
+  onOpen: PropTypes.func,
 };
 
 function MenuMobileItem({ item, isOpen, isActive, onOpen }) {
@@ -57,74 +66,55 @@ function MenuMobileItem({ item, isOpen, isActive, onOpen }) {
         </ListItemStyle>
 
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
-          <Box sx={{ display: 'flex', flexDirection: 'column-reverse' }}>
+          <Box sx={{ display: "flex", flexDirection: "column-reverse" }}>
             <NavSection
               navConfig={menuConfig[2].children}
               sx={{
-                '& .MuiList-root:last-of-type .MuiListItemButton-root': {
+                "& .MuiList-root:last-of-type .MuiListItemButton-root": {
                   height: 200,
-                  backgroundSize: '92%',
-                  backgroundPosition: 'center',
-                  bgcolor: 'background.neutral',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundImage: 'url(/static/illustrations/illustration_dashboard.png)',
-                  '& > *:not(.MuiTouchRipple-root)': { display: 'none' }
+                  backgroundSize: "92%",
+                  backgroundPosition: "center",
+                  bgcolor: "background.neutral",
+                  backgroundRepeat: "no-repeat",
+                  backgroundImage:
+                    "url(/static/illustrations/illustration_dashboard.png)",
+                  "& > *:not(.MuiTouchRipple-root)": { display: "none" },
                 },
-                '& .MuiListSubheader-root': {
+                "& .MuiListSubheader-root": {
                   pl: PADDING,
-                  display: 'flex',
-                  alignItems: 'center',
-                  '&:before': {
-                    ml: '6px',
-                    mr: '22px',
+                  display: "flex",
+                  alignItems: "center",
+                  "&:before": {
+                    ml: "6px",
+                    mr: "22px",
                     width: 8,
                     height: 2,
                     content: "''",
                     borderRadius: 2,
-                    bgcolor: 'currentColor'
-                  }
+                    bgcolor: "currentColor",
+                  },
                 },
-                '& .MuiListItem-root': {
+                "& .MuiListItem-root": {
                   pl: PADDING,
-                  '&:before': { display: 'none' },
-                  '&.active': { color: 'primary.main', bgcolor: 'transparent' }
+                  "&:before": { display: "none" },
+                  "&.active": { color: "primary.main", bgcolor: "transparent" },
                 },
-                '& .MuiListItemIcon-root': {
+                "& .MuiListItemIcon-root": {
                   width: ICON_SIZE,
                   height: ICON_SIZE,
-                  '&:before': {
+                  "&:before": {
                     width: 4,
                     height: 4,
                     content: "''",
-                    borderRadius: '50%',
-                    bgcolor: 'currentColor'
-                  }
-                }
+                    borderRadius: "50%",
+                    bgcolor: "currentColor",
+                  },
+                },
               }}
             />
           </Box>
         </Collapse>
       </div>
-    );
-  }
-
-  if (title === 'Documentation') {
-    return (
-      <ListItemStyle
-        href={path}
-        target="_blank"
-        component={Link}
-        sx={{
-          ...(isActive && {
-            color: 'primary.main',
-            fontWeight: 'fontWeightMedium',
-            bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity)
-          })
-        }}
-      >
-        <ListItemIcon>{icon}</ListItemIcon>
-        <ListItemText disableTypography primary={title} />
-      </ListItemStyle>
     );
   }
 
@@ -134,10 +124,14 @@ function MenuMobileItem({ item, isOpen, isActive, onOpen }) {
       component={RouterLink}
       sx={{
         ...(isActive && {
-          color: 'primary.main',
-          fontWeight: 'fontWeightMedium',
-          bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity)
-        })
+          color: "primary.main",
+          fontWeight: "fontWeightMedium",
+          bgcolor: (theme) =>
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.selectedOpacity
+            ),
+        }),
       }}
     >
       <ListItemIcon>{icon}</ListItemIcon>
@@ -148,7 +142,7 @@ function MenuMobileItem({ item, isOpen, isActive, onOpen }) {
 
 MenuMobile.propTypes = {
   isOffset: PropTypes.bool,
-  isHome: PropTypes.bool
+  isHome: PropTypes.bool,
 };
 
 export default function MenuMobile({ isOffset, isHome }) {
@@ -181,8 +175,8 @@ export default function MenuMobile({ isOffset, isHome }) {
         onClick={handleDrawerOpen}
         sx={{
           ml: 1,
-          ...(isHome && { color: 'common.white' }),
-          ...(isOffset && { color: 'text.primary' })
+          ...(isHome && { color: "common.white" }),
+          ...(isOffset && { color: "text.primary" }),
         }}
       >
         <Icon icon={menu2Fill} />
@@ -195,7 +189,7 @@ export default function MenuMobile({ isOffset, isHome }) {
         PaperProps={{ sx: { pb: 5, width: 260 } }}
       >
         <Scrollbar>
-          <Link component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
+          <Link component={RouterLink} to="/" sx={{ display: "inline-flex" }}>
             <Logo sx={{ mx: PADDING, my: 3 }} />
           </Link>
 

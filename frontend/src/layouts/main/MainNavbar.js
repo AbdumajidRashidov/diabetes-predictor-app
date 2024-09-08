@@ -72,7 +72,7 @@ export default function MainNavbar() {
             <Logo />
           </RouterLink>
           <Label color="primary" sx={{ ml: 1 }}>
-            Medarmon
+            VIVA
           </Label>
           <Box sx={{ flexGrow: 1 }} />
 
