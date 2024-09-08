@@ -1,10 +1,10 @@
 // material
-import { Container, Grid, Stack } from '@material-ui/core';
+import { Container, Grid, Stack } from "@material-ui/core";
 // hooks
-import useAuth from '../../hooks/useAuth';
-import useSettings from '../../hooks/useSettings';
+import useAuth from "../../hooks/useAuth";
+import useSettings from "../../hooks/useSettings";
 // components
-import Page from '../../components/Page';
+import Page from "../../components/Page";
 import {
   AppWelcome,
   AppWidgets1,
@@ -18,8 +18,8 @@ import {
   AppTotalInstalled,
   AppCurrentDownload,
   AppTotalActiveUsers,
-  AppTopInstalledCountries
-} from '../../components/_dashboard/general-app';
+  AppTopInstalledCountries,
+} from "../../components/_dashboard/general-app";
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ export default function GeneralApp() {
 
   return (
     <Page title="General: App | Minimal-UI">
-      <Container maxWidth={themeStretch ? false : 'xl'}>
+      <Container maxWidth={themeStretch ? false : "xl"}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
             <AppWelcome displayName={user.displayName} />
@@ -59,7 +59,7 @@ export default function GeneralApp() {
             <AppAreaInstalled />
           </Grid>
 
-          <Grid item xs={12} lg={8}>
+          {/* <Grid item xs={12} lg={8}>
             <AppNewInvoice />
           </Grid>
 
@@ -73,14 +73,14 @@ export default function GeneralApp() {
 
           <Grid item xs={12} md={6} lg={4}>
             <AppTopAuthors />
-          </Grid>
+          </Grid> */}
 
-          <Grid item xs={12} md={6} lg={4}>
+          {/* <Grid item xs={12} md={6} lg={4}>
             <Stack spacing={3}>
               <AppWidgets1 />
               <AppWidgets2 />
             </Stack>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Page>

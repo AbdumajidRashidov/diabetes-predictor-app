@@ -1,11 +1,11 @@
-import { filter } from 'lodash';
-import { Icon } from '@iconify/react';
-import { sentenceCase } from 'change-case';
-import { useState, useEffect } from 'react';
-import plusFill from '@iconify/icons-eva/plus-fill';
-import { Link as RouterLink } from 'react-router-dom';
+import { filter } from "lodash";
+import { Icon } from "@iconify/react";
+import { paramCase, sentenceCase } from "change-case";
+import { useState, useEffect } from "react";
+import plusFill from "@iconify/icons-eva/plus-fill";
+import { Link as RouterLink } from "react-router-dom";
 // material
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from "@material-ui/core/styles";
 import {
   Card,
   Table,
@@ -19,32 +19,40 @@ import {
   Container,
   Typography,
   TableContainer,
-  TablePagination
-} from '@material-ui/core';
+  TablePagination,
+  MenuItem,
+  Box,
+} from "@material-ui/core";
 // redux
-import { useDispatch, useSelector } from '../../redux/store';
-import { getUserList, deleteUser } from '../../redux/slices/user';
+import { useDispatch, useSelector } from "../../redux/store";
+import { getUserList, deleteUser } from "../../redux/slices/user";
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_DASHBOARD } from "../../routes/paths";
 // hooks
-import useSettings from '../../hooks/useSettings';
+import useSettings from "../../hooks/useSettings";
 // components
-import Page from '../../components/Page';
-import Label from '../../components/Label';
-import Scrollbar from '../../components/Scrollbar';
-import SearchNotFound from '../../components/SearchNotFound';
-import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../../components/_dashboard/user/list';
+import Page from "../../components/Page";
+import Label from "../../components/Label";
+import Scrollbar from "../../components/Scrollbar";
+import SearchNotFound from "../../components/SearchNotFound";
+import HeaderBreadcrumbs from "../../components/HeaderBreadcrumbs";
+import {
+  UserListHead,
+  UserListToolbar,
+  UserMoreMenu,
+} from "../../components/_dashboard/user/list";
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name', alignRight: false },
-  { id: 'company', label: 'Company', alignRight: false },
-  { id: 'role', label: 'Role', alignRight: false },
-  { id: 'isVerified', label: 'Verified', alignRight: false },
-  { id: 'status', label: 'Status', alignRight: false },
-  { id: '' }
+  { id: "name", label: "Full Name", alignRight: false },
+  { id: "email", label: "Email", alignRight: false },
+  { id: "age", label: "Age", alignRight: false },
+  { id: "phone_number", label: "Phone number", alignRight: false },
+  { id: "address", label: "Location", alignRight: false },
+  { id: "isVerified", label: "Verified", alignRight: false },
+  { id: "status", label: "Status", alignRight: false },
+  { id: "" },
 ];
 
 // ----------------------------------------------------------------------
@@ -60,7 +68,7 @@ function descendingComparator(a, b, orderBy) {
 }
 
 function getComparator(order, orderBy) {
-  return order === 'desc'
+  return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
@@ -73,7 +81,10 @@ function applySortFilter(array, comparator, query) {
     return a[1] - b[1];
   });
   if (query) {
-    return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return filter(
+      array,
+      (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
+    );
   }
   return stabilizedThis.map((el) => el[0]);
 }
@@ -84,10 +95,10 @@ export default function UserList() {
   const dispatch = useDispatch();
   const { userList } = useSelector((state) => state.user);
   const [page, setPage] = useState(0);
-  const [order, setOrder] = useState('asc');
+  const [order, setOrder] = useState("asc");
   const [selected, setSelected] = useState([]);
-  const [orderBy, setOrderBy] = useState('name');
-  const [filterName, setFilterName] = useState('');
+  const [orderBy, setOrderBy] = useState("name");
+  const [filterName, setFilterName] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
@@ -95,8 +106,8 @@ export default function UserList() {
   }, [dispatch]);
 
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
@@ -119,7 +130,10 @@ export default function UserList() {
     } else if (selectedIndex === selected.length - 1) {
       newSelected = newSelected.concat(selected.slice(0, -1));
     } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      );
     }
     setSelected(newSelected);
   };
@@ -141,21 +155,26 @@ export default function UserList() {
     dispatch(deleteUser(userId));
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - userList.length) : 0;
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - userList.length) : 0;
 
-  const filteredUsers = applySortFilter(userList, getComparator(order, orderBy), filterName);
+  const filteredUsers = applySortFilter(
+    userList,
+    getComparator(order, orderBy),
+    filterName
+  );
 
   const isUserNotFound = filteredUsers.length === 0;
 
   return (
-    <Page title="User: List | Minimal-UI">
-      <Container maxWidth={themeStretch ? false : 'lg'}>
+    <Page title="Patients: List">
+      <Container maxWidth={themeStretch ? false : "lg"}>
         <HeaderBreadcrumbs
-          heading="User List"
+          heading="My Patients"
           links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.root },
-            { name: 'List' }
+            { name: "Dashboard", href: PATH_DASHBOARD.root },
+            { name: "Patients", href: PATH_DASHBOARD.user.list },
+            { name: "List" },
           ]}
           action={
             <Button
@@ -164,13 +183,17 @@ export default function UserList() {
               to={PATH_DASHBOARD.user.newUser}
               startIcon={<Icon icon={plusFill} />}
             >
-              New User
+              Add New Patient
             </Button>
           }
         />
 
         <Card>
-          <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
+          <UserListToolbar
+            numSelected={selected.length}
+            filterName={filterName}
+            onFilterName={handleFilterByName}
+          />
 
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
@@ -185,48 +208,91 @@ export default function UserList() {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, status, company, avatarUrl, isVerified } = row;
-                    const isItemSelected = selected.indexOf(name) !== -1;
+                  {filteredUsers
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      const {
+                        id,
+                        name,
+                        email,
+                        age,
+                        phoneNumber,
+                        city,
+                        status,
+                        avatarUrl,
+                        isVerified,
+                      } = row;
+                      const isItemSelected = selected.indexOf(name) !== -1;
 
-                    return (
-                      <TableRow
-                        hover
-                        key={id}
-                        tabIndex={-1}
-                        role="checkbox"
-                        selected={isItemSelected}
-                        aria-checked={isItemSelected}
-                      >
-                        <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, name)} />
-                        </TableCell>
-                        <TableCell component="th" scope="row" padding="none">
-                          <Stack direction="row" alignItems="center" spacing={2}>
-                            <Avatar alt={name} src={avatarUrl} />
-                            <Typography variant="subtitle2" noWrap>
-                              {name}
-                            </Typography>
-                          </Stack>
-                        </TableCell>
-                        <TableCell align="left">{company}</TableCell>
-                        <TableCell align="left">{role}</TableCell>
-                        <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
-                        <TableCell align="left">
-                          <Label
-                            variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                            color={(status === 'banned' && 'error') || 'success'}
-                          >
-                            {sentenceCase(status)}
-                          </Label>
-                        </TableCell>
+                      return (
+                        <TableRow
+                          hover
+                          key={id}
+                          tabIndex={-1}
+                          role="checkbox"
+                          selected={isItemSelected}
+                          aria-checked={isItemSelected}
+                        >
+                          <TableCell padding="checkbox">
+                            <Checkbox
+                              checked={isItemSelected}
+                              onChange={(event) => handleClick(event, name)}
+                            />
+                          </TableCell>
+                          <TableCell component="th" scope="row" padding="none">
+                            <Stack
+                              direction="row"
+                              alignItems="center"
+                              spacing={2}
+                            >
+                              {" "}
+                              <MenuItem
+                                component={RouterLink}
+                                to={`${PATH_DASHBOARD.user.root}/${paramCase(
+                                  name
+                                )}/profile`}
+                              >
+                                <Avatar alt={name} src={avatarUrl} />
+                                <Typography variant="subtitle2" noWrap>
+                                  {name}
+                                </Typography>
+                              </MenuItem>
+                            </Stack>
+                          </TableCell>
+                          <TableCell align="left">{email}</TableCell>
+                          <TableCell align="left">{age}</TableCell>
+                          <TableCell align="left">{phoneNumber}</TableCell>
+                          <TableCell align="left">{city}</TableCell>
+                          <TableCell align="left">
+                            {isVerified ? "Yes" : "No"}
+                          </TableCell>
+                          <TableCell align="left">
+                            <Label
+                              variant={
+                                theme.palette.mode === "light"
+                                  ? "ghost"
+                                  : "filled"
+                              }
+                              color={
+                                (status === "banned" && "error") || "success"
+                              }
+                            >
+                              {sentenceCase(
+                                (status === "banned" && "High-risk") ||
+                                  "low-risk"
+                              )}
+                            </Label>
+                          </TableCell>
 
-                        <TableCell align="right">
-                          <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} />
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
+                          <TableCell align="right">
+                            <UserMoreMenu
+                              onDelete={() => handleDeleteUser(id)}
+                              userName={name}
+                            />
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />

@@ -55,7 +55,7 @@ const ContentStyle = styled("div")(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function Login() {
-  const { method, login } = useAuth();
+  let { method, login } = useAuth();
   console.log("method", method);
 
   const handleLoginAuth0 = async () => {
@@ -94,7 +94,7 @@ export default function Login() {
           <Stack direction="row" alignItems="center" sx={{ mb: 5 }}>
             <Box sx={{ flexGrow: 1 }}>
               <Typography variant="h4" gutterBottom>
-                Sign in to Minimal
+                Sign in to Dashboard
               </Typography>
               <Typography sx={{ color: "text.secondary" }}>
                 Enter your details below.

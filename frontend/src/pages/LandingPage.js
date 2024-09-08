@@ -35,10 +35,10 @@ export default function LandingPage() {
         <LandingMinimal />
         <LandingHugePackElements />
         <LandingDarkMode />
-        <LandingThemeColor />
+        {/* <LandingThemeColor /> */}
         <LandingCleanInterfaces />
-        <LandingPricingPlans />
-        <LandingAdvertisement />
+        {/* <LandingPricingPlans /> */}
+        {/* <LandingAdvertisement /> */}
       </ContentStyle>
     </RootStyle>
   );

@@ -52,8 +52,8 @@ const ContentStyle = styled("div")(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function Register() {
-  const { method } = useAuth();
-
+  let { method } = useAuth();
+  method = "firebase";
   return (
     <RootStyle title="Register | Minimal-UI">
       <AuthLayout>
@@ -71,7 +71,7 @@ export default function Register() {
       <MHidden width="mdDown">
         <SectionStyle>
           <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-            Manage the job more effectively with Minimal
+            Manage the job more effectively with VIVA
           </Typography>
           <img
             alt="register"

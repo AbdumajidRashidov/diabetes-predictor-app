@@ -1,37 +1,37 @@
-import { merge } from 'lodash';
-import ReactApexChart from 'react-apexcharts';
+import { merge } from "lodash";
+import ReactApexChart from "react-apexcharts";
 // material
-import { useTheme, styled } from '@material-ui/core/styles';
-import { Card, CardHeader } from '@material-ui/core';
+import { useTheme, styled } from "@material-ui/core/styles";
+import { Card, CardHeader } from "@material-ui/core";
 // utils
-import { fNumber } from '../../../utils/formatNumber';
+import { fNumber } from "../../../utils/formatNumber";
 //
-import { BaseOptionChart } from '../../charts';
+import { BaseOptionChart } from "../../charts";
 
 // ----------------------------------------------------------------------
 
 const CHART_HEIGHT = 392;
 const LEGEND_HEIGHT = 72;
 
-const ChartWrapperStyle = styled('div')(({ theme }) => ({
+const ChartWrapperStyle = styled("div")(({ theme }) => ({
   height: CHART_HEIGHT,
   marginTop: theme.spacing(5),
-  '& .apexcharts-canvas svg': { height: CHART_HEIGHT },
-  '& .apexcharts-canvas svg,.apexcharts-canvas foreignObject': {
-    overflow: 'visible'
+  "& .apexcharts-canvas svg": { height: CHART_HEIGHT },
+  "& .apexcharts-canvas svg,.apexcharts-canvas foreignObject": {
+    overflow: "visible",
   },
-  '& .apexcharts-legend': {
+  "& .apexcharts-legend": {
     height: LEGEND_HEIGHT,
-    alignContent: 'center',
-    position: 'relative !important',
+    alignContent: "center",
+    position: "relative !important",
     borderTop: `solid 1px ${theme.palette.divider}`,
-    top: `calc(${CHART_HEIGHT - LEGEND_HEIGHT}px) !important`
-  }
+    top: `calc(${CHART_HEIGHT - LEGEND_HEIGHT}px) !important`,
+  },
 }));
 
 // ----------------------------------------------------------------------
 
-const CHART_DATA = [12244, 53345, 44313, 78343];
+const CHART_DATA = [4, 5, 3, 6];
 
 export default function AppCurrentDownload() {
   const theme = useTheme();
@@ -41,45 +41,50 @@ export default function AppCurrentDownload() {
       theme.palette.primary.lighter,
       theme.palette.primary.light,
       theme.palette.primary.main,
-      theme.palette.primary.dark
+      theme.palette.primary.dark,
     ],
-    labels: ['Mac', 'Window', 'iOS', 'Android'],
+    labels: ["High-Risk", "Moderate-Risk", "Low-Risk", "No-Risk"],
     stroke: { colors: [theme.palette.background.paper] },
-    legend: { floating: true, horizontalAlign: 'center' },
+    legend: { floating: true, horizontalAlign: "center" },
     tooltip: {
       fillSeriesColor: false,
       y: {
         formatter: (seriesName) => fNumber(seriesName),
         title: {
-          formatter: (seriesName) => `${seriesName}`
-        }
-      }
+          formatter: (seriesName) => `${seriesName}`,
+        },
+      },
     },
     plotOptions: {
       pie: {
         donut: {
-          size: '90%',
+          size: "90%",
           labels: {
             value: {
-              formatter: (val) => fNumber(val)
+              formatter: (val) => fNumber(val),
             },
             total: {
               formatter: (w) => {
                 const sum = w.globals.seriesTotals.reduce((a, b) => a + b, 0);
                 return fNumber(sum);
-              }
-            }
-          }
-        }
-      }
-    }
+              },
+            },
+          },
+        },
+      },
+    },
   });
 
   return (
     <Card>
-      <CardHeader title="Current Download" />
+      <CardHeader title="Current Monitored Patients" />
       <ChartWrapperStyle dir="ltr">
-        <ReactApexChart type="donut" series={CHART_DATA} options={chartOptions} height={280} />
+        <ReactApexChart
+          type="donut"
+          series={CHART_DATA}
+          options={chartOptions}
+          height={280}
+        />
       </ChartWrapperStyle>
     </Card>
   );
