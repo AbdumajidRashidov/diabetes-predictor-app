@@ -1924,10 +1924,22 @@
   resolved "https://registry.npmjs.org/@iconify/icons-ic/-/icons-ic-1.1.9.tgz"
   integrity sha512-nuFTK+nqHpEyzICkNiqqCrDjunVqbO7ptgqznXRwi+i1H8FsxIyVGJUkLjL+/f4pKQHY5Zpvzq4PH1cLUctyJQ==
 
+"@iconify/icons-mdi@^1.2.48":
+  version "1.2.48"
+  resolved "https://registry.yarnpkg.com/@iconify/icons-mdi/-/icons-mdi-1.2.48.tgz#9a175ce14315d5c611a61a3a5bbafa40ad9d1e14"
+  integrity sha512-1Tiq+iX1d2MzrdDiw45Tc9HuhNgg8H4vvaKNV+kF+jmr/kPG+YyeLMyXUKp4bwv+gheIAgNpZPjuqAPRkmMieA==
+  dependencies:
+    "@iconify/types" "*"
+
 "@iconify/react@^3.0.1":
   version "3.0.1"
   resolved "https://registry.npmjs.org/@iconify/react/-/react-3.0.1.tgz"
   integrity sha512-yUskSSR80JzRSWcqNsBAG9AN802XzZgHsex8mTOkMLYcPQC3fk1XwK17ulnY5vf692OafhGCAMccR8TWKFaGdw==
+
+"@iconify/types@*":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@iconify/types/-/types-2.0.0.tgz#ab0e9ea681d6c8a1214f30cd741fe3a20cc57f57"
+  integrity sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"

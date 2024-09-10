@@ -47,14 +47,18 @@ export default function AppWelcome({ displayName }) {
           variant="body2"
           sx={{ pb: { xs: 3, xl: 5 }, maxWidth: 480, mx: "auto" }}
         >
-          You have <Label color="error"> 3 new </Label> patients flagged for
+          You have <Label color="error"> 2 new </Label> patients flagged for
           high diabetes risk based on recent health data. There are{" "}
           <Label color="warning">5 pending</Label> tasks that require your
           attention, including patient follow-ups and report generation.
         </Typography>
 
-        <Button variant="contained" to="#" component={RouterLink}>
-          Go to users list
+        <Button
+          variant="contained"
+          to="/dashboard/user/list"
+          component={RouterLink}
+        >
+          Go to patients list
         </Button>
       </CardContent>
 
