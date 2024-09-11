@@ -7,13 +7,6 @@ router.post("/", async (req, res) => {
   try {
     const { glucose, insulin, bmi, age } = req.body;
 
-    // // Ensure that the required fields are provided
-    // if (!glucose || !insulin || !bmi || !age) {
-    //   return res
-    //     .status(400)
-    //     .json({ message: "All health parameters are required!" });
-    // }
-
     // Call the Python script and pass the health data to it
     const pythonProcess = spawn("python3", [
       "ai/predict_model.py",
