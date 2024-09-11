@@ -7,6 +7,8 @@ const passport = require("passport");
 const { swaggerUi, swaggerSpec } = require("./config/swagger"); // Import Swagger setup
 require("dotenv").config();
 require("./config/passport");
+const predictRouter = require("./routes/predict");
+
 const app = express();
 
 // Connect Database
@@ -38,6 +40,7 @@ app.use("/auth", require("./routes/authRoutes"));
 app.use("/patients", require("./routes/patientRoutes"));
 app.use("/doctors", require("./routes/doctorRoutes"));
 app.use("/fitness", require("./routes/fitnessRoutes"));
+app.use("/predict", predictRouter);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
