@@ -17,7 +17,12 @@ router.get(
     scope: process.env.GOOGLE_OAUTH_SCOPE.split(" "),
     accessType: "offline",
     prompt: "consent",
-  })
+  }),
+
+  async (req, res) => {
+    // If password is set, proceed to the dashboard
+    res.redirect("/dashboard");
+  }
 );
 
 // Google OAuth callback route
@@ -25,6 +30,7 @@ router.get(
   "/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/login",
+    successRedirect: "/dashboard",
     accessType: "offline",
     prompt: "consent",
     scope: process.env.GOOGLE_OAUTH_SCOPE.split(" "),

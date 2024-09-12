@@ -1,0 +1,78 @@
+Arguments: 
+  /opt/homebrew/Cellar/node/22.4.1/bin/node /usr/local/bin/yarn jest --runInBand --detectOpenHandles
+
+PATH: 
+  /Users/mac/Desktop/Dissertation/Diabetes-Prediction/flask/myenv/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Users/mac/anaconda3/bin:/Users/mac/anaconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  22.4.1
+
+Platform: 
+  darwin arm64
+
+Trace: 
+  TypeError: Cannot convert object to primitive value
+      at Array.join (<anonymous>)
+      at [format] (/usr/local/lib/node_modules/yarn/lib/cli.js:135834:80)
+      at ShellString.toString (/usr/local/lib/node_modules/yarn/lib/cli.js:135830:30)
+      at sh (/usr/local/lib/node_modules/yarn/lib/cli.js:135923:55)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:61585:52
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "backend",
+    "version": "1.0.0",
+    "main": "app.js",
+    "scripts": {
+      "jest": {
+        "setupFiles": ["./test/setup.js"]
+      },
+      "test": "jest --runInBand",
+      "start": "node server.js",
+      "server": "nodemon server.js",
+      "dev": "nodemon server.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+      "bcryptjs": "^2.4.3",
+      "body-parser": "^1.20.3",
+      "child_process": "^1.0.2",
+      "connect-mongo": "^5.1.0",
+      "cors": "^2.8.5",
+      "dotenv": "^16.4.5",
+      "express": "^4.20.0",
+      "express-session": "^1.18.0",
+      "googleapis": "^140.0.1",
+      "jsonwebtoken": "^9.0.2",
+      "mongodb": "^6.8.0",
+      "mongoose": "^8.5.2",
+      "passport": "^0.7.0",
+      "passport-google-oauth20": "^2.0.0",
+      "passport-local": "^1.0.0",
+      "swagger-jsdoc": "^6.2.8",
+      "swagger-ui-express": "^5.0.1",
+      "uuid": "^10.0.0"
+    },
+    "devDependencies": {
+      "chai": "^5.1.1",
+      "jest": "^29.7.0",
+      "mockingoose": "^2.16.2",
+      "nodemon": "^3.1.4",
+      "supertest": "^7.0.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

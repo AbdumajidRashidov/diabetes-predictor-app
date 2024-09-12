@@ -42,5 +42,4 @@ app.use("/doctors", require("./routes/doctorRoutes"));
 app.use("/fitness", require("./routes/fitnessRoutes"));
 app.use("/predict", predictRouter);
 
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+module.exports = app;

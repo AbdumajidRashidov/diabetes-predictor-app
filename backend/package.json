@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "server": "nodemon app.js",
-    "dev": "nodemon app.js"
+    "test": "jest --runInBand",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "dev": "nodemon server.js"
+  },
+  "jest": {
+    "setupFiles": [
+      "./test/setup.js"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -24,6 +29,7 @@
     "googleapis": "^140.0.1",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.8.0",
+    "mongodb-memory-server": "^10.0.0",
     "mongoose": "^8.5.2",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
@@ -33,6 +39,10 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "chai": "^5.1.1",
+    "jest": "^29.7.0",
+    "mockingoose": "^2.16.2",
+    "nodemon": "^3.1.4",
+    "supertest": "^7.0.0"
   }
 }
